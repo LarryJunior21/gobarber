@@ -27,6 +27,10 @@ class User extends Model {
     return this;
   }
 
+  static associate(models) {
+    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
+  }
+
   checkPassword(password) {
     //FAZ A ENCRIPTAÇÃO DA SENHA E VERIFICA SE AS DUAS SÃO IGUAIS
     //POIS NO BANCO É GUARDADA APENAS A SENHA GERADA COM O HASH
