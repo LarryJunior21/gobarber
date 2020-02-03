@@ -4,6 +4,7 @@ import { Router } from 'express';
 import UserController from './app/controllers/userController';
 import SessionController from './app/controllers/sessionController';
 import FileController from './app/controllers/fileController';
+import ProviderController from './app/controllers/providerController';
 
 //IMPORT AUTENTICAÇÃO USUARIO TOKEN
 import authMiddleware from './app/middlewares/auth';
@@ -24,6 +25,8 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
 
 routes.put('/update', UserController.update);
+
+routes.get('/providers', ProviderController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
