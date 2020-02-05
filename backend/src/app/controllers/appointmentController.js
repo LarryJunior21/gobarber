@@ -12,11 +12,11 @@ import Notification from '../schemas/Notifications';
 class AppointmentController {
   async index(req, res) {
     const { page = 1 } = req.query;
-
+    // LISTA OS APPOINTMENTS
     const appointments = await Appointment.findAll({
       where: { user_id: req.userId, canceled_at: null },
       order: ['date'],
-      attributes: ['id', 'date', 'user_id', 'canceled_at'],
+      attributes: ['id', 'date', 'user_id', 'canceled_at', 'created_at', 'updated_at'],
       limit: 20,
       offset: (page - 1) * 20,
       include: [
@@ -59,6 +59,13 @@ class AppointmentController {
 
     if (!isProvider) {
       return res.status(401).json({ erro: 'User not a provider' });
+    }
+
+    /**
+     * VERIFICA SE ELE ESTA TENTANDO FAZER APPOINTMENTS PARA ELE MESMO
+     */
+    if (req.userId === provider_id) {
+      return res.status(401).json({ erro: 'Cant make self appointments' });
     }
 
     /**
