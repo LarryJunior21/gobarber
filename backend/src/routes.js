@@ -12,6 +12,7 @@ import ProviderController from './app/controllers/providerController';
 import appointmentController from './app/controllers/appointmentController';
 import scheduleController from './app/controllers/scheduleController';
 import NotificationController from './app/controllers/notificationController';
+import AvailableController from './app/controllers/availableController';
 
 // IMPORT AUTENTICAÇÃO USUARIO TOKEN
 import authMiddleware from './app/middlewares/auth';
@@ -30,6 +31,8 @@ routes.use(authMiddleware);
 routes.put('/update', UserController.update);
 
 routes.get('/providers', ProviderController.index);
+routes.get('/providers/:providerId/available', AvailableController.index);
+
 
 routes.get('/appointments', appointmentController.index);
 routes.post('/appointments', appointmentController.store);
