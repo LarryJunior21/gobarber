@@ -1,6 +1,6 @@
 import express from 'express';
-import routes from './routes';
 import path from 'path';
+import routes from './routes';
 
 import './database';
 
@@ -13,9 +13,9 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
-    //USA IMPORT PATH PARA CONSEGUIR UTILIZAR OS ARQUIVOS
+    // USA IMPORT PATH PARA CONSEGUIR UTILIZAR OS ARQUIVOS
     this.server.use('/files', express.static(
-      path.resolve(__dirname, '..', 'tmp', 'uploads')
+      path.resolve(__dirname, '..', 'tmp', 'uploads'),
     ));
   }
 

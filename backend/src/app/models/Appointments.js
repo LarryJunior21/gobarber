@@ -1,7 +1,6 @@
 import { Model, Sequelize } from 'sequelize';
 
 class Appointment extends Model {
-
   static init(sequelize) {
     super.init(
       {
@@ -9,9 +8,9 @@ class Appointment extends Model {
         canceled_at: Sequelize.DATE,
       },
       {
-        //VARIAVEL PARA TRADUÇÃO DE CODIGO JAVASCRIPT PARA SQL
+        // VARIAVEL PARA TRADUÇÃO DE CODIGO JAVASCRIPT PARA SQL
         sequelize,
-      }
+      },
     );
 
     return this;
