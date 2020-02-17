@@ -1,4 +1,5 @@
 import { Model, Sequelize } from 'sequelize';
+import { isBefore, subHours } from 'date-fns';
 
 class Appointment extends Model {
   static init(sequelize) {
@@ -6,6 +7,20 @@ class Appointment extends Model {
       {
         date: Sequelize.DATE,
         canceled_at: Sequelize.DATE,
+        past: {
+          // VIRTUAL SÓ EXISTE DENTRO DO SQL E NAO NA TABLE
+          type: Sequelize.VIRTUAL,
+          get() {
+            // RETORNA SE A DATA JA PASSOU
+            return isBefore(this.date, new Date());
+          },
+        },
+        cancelable: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return isBefore(new Date(), subHours(this.date, 2));
+          },
+        },
       },
       {
         // VARIAVEL PARA TRADUÇÃO DE CODIGO JAVASCRIPT PARA SQL
