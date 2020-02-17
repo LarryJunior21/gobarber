@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import express from 'express';
 import path from 'path';
 import * as Sentry from '@sentry/node';
@@ -38,10 +40,14 @@ class App {
     // QUANDO EXISTEM 4 PARAMETROS O EXPRESS ENTENDE
     // QUE É UM TRATAMENTO DE ERRO
     this.server.use(async (err, req, res, next) => {
+      if (process.env.NODE_ENV === 'development') {
       //                                      .toHTML();
-      const errors = await new Youch(err, req).toJSON();
+        const errors = await new Youch(err, req).toJSON();
 
-      return res.status(500).json(errors);
+        return res.status(500).json(errors);
+      }
+
+      return res.status(500).json({ error: 'Internal server error' });
     });
   }
 }
