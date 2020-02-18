@@ -4,6 +4,7 @@ import express from 'express';
 import path from 'path';
 import * as Sentry from '@sentry/node';
 import Youch from 'youch';
+import cors from 'cors';
 import 'express-async-errors';
 import routes from './routes';
 import sentryConfig from './config/sentry';
@@ -24,6 +25,12 @@ class App {
 
   middlewares() {
     this.server.use(Sentry.Handlers.requestHandler());
+
+    // MODO DESENVOLVIMENTO
+    this.server.use(cors());
+    // PARA COLOCAR ONLINE
+    // this.server.use(cors({ origin: 'https://google.com' }));
+
     this.server.use(express.json());
     // USA IMPORT PATH PARA CONSEGUIR UTILIZAR OS ARQUIVOS
     this.server.use('/files', express.static(

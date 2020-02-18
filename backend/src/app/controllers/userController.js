@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import User from '../models/User';
+import File from '../models/File';
 
 class UserController {
   async store(req, res) {
@@ -43,8 +44,10 @@ class UserController {
     }
 
     const { email, oldPassword } = req.body;
+
     // BUSCA USUARIO PELO ID
     const user = await User.findByPk(req.userId);
+
     // VERIFICA SE QUER MUDAR O EMAIL E SE O EMAIL ALTERADO JA EXISTE
     if (email && email !== user.email) {
       const userExists = await User.findOne({
@@ -55,14 +58,31 @@ class UserController {
         return res.status(400).json({ error: 'User Existe >:(' });
       }
     }
+
     // VERIFICA SE QUER MUDAR A SENHA E CHECA SE A SENHA ANTIGA É VALIDA
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
       return res.status(401).json({ error: 'Pwd does not match' });
     }
 
-    const usr = await user.update(req.body);
-    // SE DEU TUDO CERTO RETORNA O USUARIO ALTERADO
-    return res.json(usr);
+    // USUARIO ALTERADO
+    await user.update(req.body);
+
+    const { id, name, avatar } = await User.findByPk(req.userId, {
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(
+      id,
+      name,
+      email,
+      avatar,
+    );
   }
 }
 
