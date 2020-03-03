@@ -24,7 +24,6 @@ export default function auth(state = INITIAL_STATE, action) {
         break;
       }
       default:
-        return state;
     }
   });
 }
