@@ -55,7 +55,7 @@ class UserController {
       });
 
       if (userExists) {
-        return res.status(400).json({ error: 'User Existe >:(' });
+        return res.status(400).json({ error: 'Email Ja Existe >:(' });
       }
     }
 
@@ -77,12 +77,12 @@ class UserController {
       ],
     });
 
-    return res.json(
+    return res.json({
       id,
       name,
       email,
       avatar,
-    );
+    });
   }
 }
 
