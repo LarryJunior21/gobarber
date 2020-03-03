@@ -1,11 +1,25 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { FadeLoader } from 'react-spinners';
+import { css } from '@emotion/core';
 
 import logo from '~/assets/logo.png';
 
-export default function SignIn() {
+import { signUpRequest } from '~/store/modules/auth/actions';
+
+const override = css`
+  display: flex;
+  margin: auto;
+  margin-top: 10px;
+`;
+
+export default function SignUp() {
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
+
   const schema = Yup.object().shape({
     name: Yup.string().required('*Digite seu nome'),
     email: Yup.string()
@@ -16,9 +30,8 @@ export default function SignIn() {
       .required('*Digite uma senha'),
   });
 
-  function handleSubmit(data) {
-    // eslint-disable-next-line no-console
-    console.log(data);
+  function handleSubmit({ name, email, password }) {
+    dispatch(signUpRequest(name, email, password));
   }
 
   return (
@@ -32,6 +45,7 @@ export default function SignIn() {
 
         <button type="submit">Cadastrar</button>
         <Link to="/">Já possui cadastro? Faça Login</Link>
+        <FadeLoader css={override} color="#fff" loading={loading} />
       </Form>
     </>
   );
