@@ -1,8 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { FadeLoader } from 'react-spinners';
+import { css } from '@emotion/core';
 import { signInRequest } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/logo.png';
@@ -14,11 +16,17 @@ const schema = Yup.object().shape({
   password: Yup.string().required('*Digite uma senha'),
 });
 
+const override = css`
+  display: flex;
+  margin: auto;
+  margin-top: 10px;
+`;
+
 export default function SignIn() {
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit({ email, password }) {
-    // eslint-disable-next-line no-console
     dispatch(signInRequest(email, password));
   }
 
@@ -32,6 +40,7 @@ export default function SignIn() {
 
         <button type="submit">Acessar</button>
         <Link to="/register">Criar uma nova conta</Link>
+        <FadeLoader css={override} color="#fff" loading={loading} />
       </Form>
     </>
   );
