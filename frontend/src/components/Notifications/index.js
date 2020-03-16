@@ -64,20 +64,26 @@ export default function Notifications() {
 
       <NotificationList visible={visible}>
         <Scroll>
-          {notifications.map(notification => (
-            <Notification unread={!notification.read}>
-              <p>{notification.content}</p>
-              <time>{notification.timeDistance}</time>
-              {!notification.read && (
-                <button
-                  type="button"
-                  onClick={() => _handleRead(notification._id)}
-                >
-                  Marcar como lida
-                </button>
-              )}
-            </Notification>
-          ))}
+          {notifications.length === 0 ? (
+            <h3>Não há nada por aqui ainda ;)</h3>
+          ) : (
+            <>
+              {notifications.map(notification => (
+                <Notification unread={!notification.read}>
+                  <p>{notification.content}</p>
+                  <time>{notification.timeDistance}</time>
+                  {!notification.read && (
+                    <button
+                      type="button"
+                      onClick={() => _handleRead(notification._id)}
+                    >
+                      Marcar como lida
+                    </button>
+                  )}
+                </Notification>
+              ))}
+            </>
+          )}
         </Scroll>
       </NotificationList>
     </Container>
