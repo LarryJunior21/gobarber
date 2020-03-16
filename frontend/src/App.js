@@ -11,7 +11,7 @@ import history from './services/history';
 
 import { store, persistor } from './store';
 
-import GlobalStyle from './styles/global';
+import GlobalStyle from '~/styles/global';
 
 function App() {
   return (

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-import AuthLayout from '~/layouts/auth';
-import DefaultLayout from '~/layouts/default';
+import AuthLayout from '~/layouts/auth/index';
+import DefaultLayout from '~/layouts/default/index';
 
 import { store } from '~/store';
 

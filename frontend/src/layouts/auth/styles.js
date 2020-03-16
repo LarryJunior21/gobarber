@@ -3,9 +3,8 @@ import { darken } from 'polished';
 
 export const Wrapper = styled.div`
   height: 100%;
-  width: 100%;
   background: linear-gradient(-90deg, #10acdd, #5edaff);
-  flex-direction: column;
+  display: flex;
   justify-content: center;
   align-items: center;
 `;
