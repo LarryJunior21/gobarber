@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Wrapper = styled.div`
+  display: flex;
   height: 100%;
   background: linear-gradient(-90deg, #10acdd, #5edaff);
-  display: flex;
   justify-content: center;
   align-items: center;
 `;

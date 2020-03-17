@@ -42,7 +42,6 @@ export const Profile = styled.div`
   margin-left: 20px;
   padding-left: 20px;
   border-left: 1px solid #eee;
-
   div {
     text-align: right;
     margin-right: 10px;
