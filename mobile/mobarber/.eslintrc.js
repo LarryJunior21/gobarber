@@ -1,12 +1,11 @@
 module.exports = {
   env: {
-    browser: true,
     es6: true,
   },
   extends: [
-    'plugin:react/recommended',
     'airbnb',
-    'prettier'
+    'prettier',
+    'prettier/react'
   ],
   globals: {
     Atomics: 'readonly',
@@ -37,7 +36,10 @@ module.exports = {
     "no-underscore-dangle": "off",
     "import/no-unresolved": "off",
     "import/extensions": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "react/prefer-stateless-function": "off",
+    "no-use-before-define": "off",
+    "no-undef": "off"
   },
 };
 
