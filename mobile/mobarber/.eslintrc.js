@@ -41,5 +41,12 @@ module.exports = {
     "no-use-before-define": "off",
     "no-undef": "off"
   },
+  settings: {
+    "import/resolver": {
+      "babel-plugin-root-import": {
+        rootPathSuffix: "src"
+      }
+    }
+  }
 };
 
